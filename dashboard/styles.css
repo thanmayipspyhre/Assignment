@@ -218,14 +218,21 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 .rel-s { font-size: 14px; color: var(--ink-2); }
 .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
 
-.dl-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.dl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .dl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; display: grid; gap: 14px; align-content: start; box-shadow: var(--shadow); }
 .dl-top { display: flex; align-items: center; gap: 14px; }
 .dl-ic { width: 46px; height: 46px; border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
 .dl h3 { font-size: 19px; }
 .dl-meta { font-size: 13px; color: var(--muted); }
 .dl p { color: var(--ink-2); font-size: 15px; }
-.dl .btn { justify-self: start; }
+.dl .btn { justify-self: stretch; justify-content: center; }
+.dl { transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.dl:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(14, 26, 51, .12); }
+.dl:nth-child(2) { border-top: 3px solid var(--accent); }
+.dl:nth-child(3) { border-top: 3px solid var(--good); }
+.dl:nth-child(2) .dl-ic { background: var(--accent-soft); color: var(--accent); }
+.dl:nth-child(3) .dl-ic { background: var(--good-soft); color: var(--good); }
+.dl p { line-height: 1.65; }
 
 .footer { padding-block: 28px; border-top: 1px solid var(--line); background: var(--bg); }
 .footer-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); }
@@ -233,7 +240,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 /* ---------- responsive ---------- */
 @media (max-width: 980px) {
   .steps, .rel-grid { grid-template-columns: 1fr; }
-  .cards, .two, .dl-grid, .two-col { grid-template-columns: 1fr; }
+  .cards, .two, .two-col { grid-template-columns: 1fr; }
+  .dl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   .section { padding-block: 44px; }
@@ -245,6 +253,7 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .panel, .player { padding: 18px; }
   .search { width: 100%; }
+  .dl-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
