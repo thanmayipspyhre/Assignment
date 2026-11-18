@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pressure Performers</title>
+<meta name="description" content="SupeRR Selector Season 2, Round 1: the batters and bowlers who deliver most reliably under pressure, how pressure was defined, and the full methodology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>
+  try { var t = localStorage.getItem("pp-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label="Pressure Performers, back to top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Pressure Performers</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#pressure">Pressure</a>
+      <a href="#batters">Batters</a>
+      <a href="#bowlers">Bowlers</a>
+      <a href="#shortlist">Top 30</a>
+      <a href="#reliability">Reliability</a>
+      <a href="#downloads">Downloads</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark theme">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a8.5 8.5 0 1 0 11.5 11.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-in">
+      <p class="eyebrow">SupeRR Selector Season 2 &middot; Round 1</p>
+      <h1>Who delivers when the match is on the line?</h1>
+      <p class="lede">We rated every IPL and T20I batter and bowler since 2022 on the balls where the result could swing, and compared each with their own usual level. The result is two ranked top-10 lists, built only from the supplied data.</p>
+      <div class="cta-row" id="heroCta"></div>
+      <div class="kpis" id="kpis"></div>
+    </div>
+  </section>
+
+  <section class="section" id="pressure">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Method</p>
+        <h2>How pressure is calculated</h2>
+        <p class="sec-sub">Pressure belongs to the match situation, not the player. A ball counts as a pressure ball only if all three tests pass, using information available before the ball is bowled.</p>
+      </header>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>Past the powerplay</h3>
+          <p>At least 36 legal balls have been bowled. Early overs look high-stakes to the model only because it is uncertain there, so they are excluded.</p>
+        </li>
+        <li class="step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>High leverage</h3>
+          <p>The state is in the top 25% of its innings for leverage: how much the win probability usually swings on a ball in a situation like this.</p>
+        </li>
+        <li class="step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>Contest still open</h3>
+          <p>The batting side's win probability is between 20% and 80%. A late over in a decided match has no real pressure.</p>
+        </li>
+      </ol>
+      <p class="result-line"><strong>15.3% of all balls</strong> pass all three tests: 29,392 of 192,466 deliveries.</p>
+
+      <div class="two">
+        <article class="panel">
+          <h3 class="panel-h"><span class="dot dot-bat"></span>Conditions for a batter</h3>
+          <ul class="ticks">
+            <li>Faces a legal delivery (wides and no-balls are not held against the batter)</li>
+            <li>At least 36 legal balls of the innings bowled</li>
+            <li>State in the top 25% of leverage for the innings</li>
+            <li>Batting side's win probability between 20% and 80%</li>
+          </ul>
+          <p class="panel-foot"><strong>Judged on:</strong> runs above the league average in the same situation, less 5.5 runs for their own dismissal, compared with their usual level. <strong>Eligible with</strong> 100+ pressure balls, 8+ matches, 120+ ordinary balls.</p>
+        </article>
+        <article class="panel">
+          <h3 class="panel-h"><span class="dot dot-bowl"></span>Conditions for a bowler</h3>
+          <ul class="ticks">
+            <li>Any delivery counts, including wides and no-balls (extras under pressure count against the bowler)</li>
+            <li>At least 36 legal balls of the innings bowled</li>
+            <li>State in the top 25% of leverage for the innings</li>
+            <li>Batting side's win probability between 20% and 80%</li>
+          </ul>
+          <p class="panel-foot"><strong>Judged on:</strong> runs saved against the league average in the same situation, plus 5.5 runs per wicket (run-outs excluded), compared with their usual level. <strong>Eligible with</strong> 100+ pressure deliveries, 8+ matches, 120+ ordinary deliveries.</p>
+        </article>
+      </div>
+
+      <div class="two charts">
+        <article class="panel">
+          <h3 class="panel-h">Leverage rises at the end of an innings</h3>
+          <p class="panel-sub">Average win-probability swing per ball, by balls left</p>
+          <div class="legend"><span><i class="sw sw-2"></i>Second innings (chase)</span><span><i class="sw sw-1"></i>First innings</span></div>
+          <div class="chart" id="chartLev" role="img" aria-label="Line chart: leverage is highest in the last six balls and in the first overs, lowest in the middle overs, and higher in chases than in first innings."></div>
+        </article>
+        <article class="panel">
+          <h3 class="panel-h">Where the pressure balls fall</h3>
+          <p class="panel-sub">Share of balls flagged as pressure, by balls left</p>
+          <div class="chart" id="chartFlag" role="img" aria-label="Bar chart: over half of balls in the last six are flagged, about a fifth in the middle overs, and none in the powerplay."></div>
+        </article>
+      </div>
+
+      <div class="two">
+        <article class="panel">
+          <h3 class="panel-h">Pressure balls behave differently</h3>
+          <p class="panel-sub">Compared with ordinary balls in the same innings and stage</p>
+          <table class="mini">
+            <thead><tr><th scope="col">Measure</th><th scope="col" class="num">Pressure</th><th scope="col" class="num">Ordinary</th></tr></thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+          <p class="panel-foot">A pressure ball moves the match about three times as much, and wickets are more likely. Batters do not slow down; they take more risk to keep scoring, which is why dismissal cost is part of the rating.</p>
+        </article>
+        <article class="panel">
+          <h3 class="panel-h">The win-probability model</h3>
+          <p class="panel-sub">Gradient-boosted trees on the state before each ball</p>
+          <ul class="plain">
+            <li>Inputs: innings, balls left, wickets lost, runs, run rates, and for chases the target and required rate.</li>
+            <li>Every prediction is out-of-fold, so no ball is scored by a model that saw its own match.</li>
+            <li><strong>AUC 0.81</strong> overall and <strong>0.90 in chases</strong>; weaker in the first innings (0.69) where there is no target.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="batters">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Result</p>
+        <h2>Top 10 batters under pressure</h2>
+        <p class="sec-sub">Rating is the estimated pressure level in runs per 100 balls above the league average in the same situations. Strike rate and out % are shown as pressure / usual.</p>
+      </header>
+      <div class="cards" id="battersGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="bowlers">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Result</p>
+        <h2>Top 10 bowlers under pressure</h2>
+        <p class="sec-sub">Same scale as the batters: runs saved per 100 deliveries above the league average in the same situations. Economy and wicket % are shown as pressure / usual.</p>
+      </header>
+      <div class="cards" id="bowlersGrid"></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="shortlist">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Longer list</p>
+        <h2>Top 30 shortlist</h2>
+        <p class="sec-sub">Positions 11 to 30 are close together and their rank ranges overlap heavily. Treat them as strong candidates, not a precise order. The top 10 are highlighted.</p>
+      </header>
+      <div class="toolbar">
+        <div class="seg" role="tablist" aria-label="Choose a list">
+          <button type="button" role="tab" id="tabBat" aria-selected="true" data-list="bat">Batters</button>
+          <button type="button" role="tab" id="tabBowl" aria-selected="false" data-list="bowl">Bowlers</button>
+        </div>
+        <label class="search" for="q"><span class="sr">Search players</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="q" type="search" placeholder="Search a player" autocomplete="off">
+        </label>
+      </div>
+      <div class="table-scroll">
+        <table class="grid" id="shortTable">
+          <thead><tr id="shortHead"></tr></thead>
+          <tbody id="shortBody"></tbody>
+        </table>
+      </div>
+      <p class="note" id="shortNote"></p>
+    </div>
+  </section>
+
+  <section class="section" id="reliability">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Trust</p>
+        <h2>How reliable is this?</h2>
+        <p class="sec-sub">The win-probability model is accurate. The player ratings are only moderately reliable, because each player has between 100 and 470 pressure balls. The set of names is more trustworthy than the order within it.</p>
+      </header>
+      <div class="rel-grid">
+        <article class="rel"><p class="rel-v">0.26</p><p class="rel-l">Batters: split-half reliability</p><p class="rel-s">Rate players on two random halves of the matches; this is how much the halves agree (0.41 for the full data).</p></article>
+        <article class="rel"><p class="rel-v">0.18</p><p class="rel-l">Bowlers: split-half reliability</p><p class="rel-s">Same test for bowlers (0.31 for the full data). Earlier versions of the rating scored -0.13 and 0.11.</p></article>
+        <article class="rel"><p class="rel-v">93%</p><p class="rel-l">Most secure place: Jasprit Bumrah</p><p class="rel-s">Share of 1,000 match resamples in which he stays in the top 10. Most others sit between 18% and 68%.</p></article>
+      </div>
+      <article class="panel limits">
+        <h3 class="panel-h">Known limits</h3>
+        <ul class="plain two-col">
+          <li><strong>Small samples.</strong> Rank ranges are wide, and a few picks have fewer than 20 matches behind them.</li>
+          <li><strong>The 100-ball minimum was chosen after seeing the results.</strong> It was raised from 60 to remove picks that rested on usual level alone.</li>
+          <li><strong>No pitch or venue model.</strong> The data has a venue but no conditions; most of the 98 venues have too few matches.</li>
+          <li><strong>No opposition adjustment.</strong> T20I includes weaker sides than the IPL; IPL-only and T20I-only checks are shown on each card.</li>
+          <li><strong>Batting and bowling rated separately,</strong> as the task asks. Fielding is not credited.</li>
+          <li><strong>Batters' usual level predicts nearly as well as the pressure rating</strong> on held-out matches (0.125 against 0.085).</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section alt" id="downloads">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Files</p>
+        <h2>Downloads</h2>
+        <p class="sec-sub">Everything needed to read, check or reproduce the result. No outside data was used: only the files supplied for the competition.</p>
+      </header>
+      <div class="dl-grid" id="dlGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <p>Pressure Performers &middot; SupeRR Selector Season 2, Round 1 methodology and results.</p>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
